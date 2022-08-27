@@ -1,26 +1,30 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { Fragment, useState } from 'react';
+import GlobalStyle from './styles/globalStyles';
+import { Header } from './components/Header';
+import { Products } from './components/Products';
+import { Checkout } from './components/Checkout';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+export interface ModalTypes {
+  isOpen?: boolean;
+  setIsOpen: (value: boolean) => void;
 }
+
+const App: React.FC = () => {
+  const [isOpen, setIsOpen] = useState<boolean>(false)
+  return (
+    <Fragment>
+      <GlobalStyle />
+      <Header
+        setIsOpen={setIsOpen}
+      />
+      <Products/>
+      <Checkout
+        isOpen={isOpen}
+        setIsOpen={setIsOpen}
+      />
+    </Fragment>
+  );
+};
+
 
 export default App;
